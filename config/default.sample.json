@@ -1,0 +1,28 @@
+{
+  "log": {
+    "path": "F:\\orchestrator-logs"
+  },
+  "app": {
+    "path": "F:\\01-NM-AZURE-DEV\\01-NM-AZURE-DEV\\wildfly-8.2.0.Final\\bin",
+    "cmd": "00_start_appsvr.bat"
+  },
+  "relay": {
+    "path": "F:\\devops\\smtpforward",
+    "cmd": "server.js"
+  },
+  "iso": {
+    "deploy": {
+      "source": "F:\\01-NM-AZURE-DEV\\01-NM-AZURE-DEV\\iso",
+      "files": ["runISOListener.bat", "servletconfig.xml", "http.log4j.xml"],
+      "destination": "F:\\01-NM-AZURE-DEV\\01-NM-AZURE-DEV"
+    },
+    "cmd": "runISOListener.bat",
+    "list": {
+      "server": "abbe1-aesql-01.database.windows.net",
+      "database": "abbe1-aedb-core01",
+      "user": "?????",
+      "password": "???????????????",
+      "query": "SELECT c.COMPANY_NAME as company, e.ENVIR_NAME as environment, c.AD_DOMAIN as directory, (6000 + e.AUTH_ENVIR_ID) as port FROM X_AUTH_COMPANY c INNER JOIN X_AUTH_ENVIR_XREF x ON c.AUTH_COMPANY_ID = x.AUTH_COMPANY_ID INNER JOIN X_AUTH_ENVIR e ON e.AUTH_ENVIR_ID = x.AUTH_ENVIR_ID WHERE e.AUTH_ENVIR_ID >= 0;"
+    }
+  }
+}
